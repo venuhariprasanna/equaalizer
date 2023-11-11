@@ -1,0 +1,40 @@
+[package]
+name = "aqueduct"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+async-graphql = { version = "5.0.7", default-features = false }
+async-trait = "0.1.52"
+bcs = "0.1.3"
+futures = "0.3.17"
+linera-sdk = { path = "../../linera-protocol/linera-sdk" }
+linera-views = { path = "../../linera-protocol/linera-views" }
+serde = { version = "1.0.130", features = ["derive"] }
+serde_json = "1.0.93"
+thiserror = "1.0.31"
+logger = { path = "../../linera_logger/logger" }
+logger_macro = { path = "../../linera_logger/logger_macro" }
+log = "0.4.19"
+hex = "0.4.3"
+toml = "0.7.6"
+find-crate = "0.6.3"
+uuid = { version = "1.4.1", default-features = false }
+
+[dev-dependencies]
+linera-sdk = { path = "../../linera-protocol/linera-sdk", features = ["test", "wasmer"] }
+webassembly-test = "0.1.0"
+
+[[bin]]
+name = "aqueduct_contract"
+path = "src/contract.rs"
+
+[[bin]]
+name = "aqueduct_service"
+path = "src/service.rs"
+
+[profile.release]
+debug = true
+lto = true
+opt-level = 'z'
+strip = 'debuginfo'
